@@ -67,7 +67,7 @@ jobs:
 
             uvicorn main:app
 
-            rm ${{env.ZIP_FILE}}
+            # rm ${{env.ZIP_FILE}}
           EOF
         env:
           KEY_FILE: ${{ runner.temp }}/${{ env.KEY_FILE }}
