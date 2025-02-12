@@ -69,7 +69,7 @@ jobs:
             pip install -r requirements.txt
 
             # Start uvicorn in the background
-            nohup uvicorn main:app --host 0.0.0.0 --port 8000 &
+            tmux new-session -d -s uvicorn_session 'uvicorn main:app --host 0.0.0.0 --port 8000'
 
             rm ${{env.ZIP_FILE}}
           EOF
