@@ -48,14 +48,6 @@ async def get_books() -> OrderedDict[int, Book]:
     return db.get_books()
 
 
-# @router.get("/{book_id}", response_model=Book, status_code=status.HTTP_200_OK)
-# async def get_book(book_id: int) -> Book:
-#     """Retrieve a book by its ID"""
-#     book: Optional[Book] = db.get_book(book_id)
-#     if not book:
-#         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Book not found")
-    
-#     return book
 
 @router.get("/{book_id}", response_model=Book, status_code=status.HTTP_200_OK)
 async def get_book_by_ID(book_id: int) -> Book:
@@ -79,12 +71,3 @@ async def update_book(book_id: int, book: Book) -> Book:
 async def delete_book(book_id: int) -> None:
     db.delete_book(book_id)
     return JSONResponse(status_code=status.HTTP_204_NO_CONTENT, content=None)
-
-########################### to be deleted!!!!!!!!!
-# @router.get("/me/{name}", status_code=status.HTTP_200_OK)
-# async def me(name: str) -> Book:
-#     """Retrieve a book by its ID"""
-#     return JSONResponse(
-#         status_code=status.HTTP_200_OK,
-#         content={"name": name}
-#     )
