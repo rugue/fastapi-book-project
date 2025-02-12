@@ -55,6 +55,9 @@ jobs:
 
             cd ${{ env.TARGET_FOLDER }}
 
+            # Kill existing uvicorn process if running
+            pkill -f "uvicorn main:app" || true
+
             # Unzip the deployment package
             unzip -o ${{env.ZIP_FILE}}
 
@@ -65,7 +68,8 @@ jobs:
             python -m pip install --upgrade pip
             pip install -r requirements.txt
 
-            nohup uvicorn main:app --host 0.0.0.0 --port 8080 &
+            # Start uvicorn in the background
+            nohup uvicorn main:app --host 0.0.0.0 --port 8000 &
 
             rm ${{env.ZIP_FILE}}
           EOF
