@@ -11,7 +11,6 @@ jobs:
 
     env:
       KEY_FILE: ec2_key.pem
-      OUTPUT_FOLDER: ./
       ZIP_FILE: app.zip
       TARGET_FOLDER: ./fast-api-book-project
 
@@ -52,7 +51,7 @@ jobs:
       - name: Deploy to server
         run: |
           ssh -o ServerAliveInterval=60 -o ServerAliveCountMax=120 -t -i ${{ env.KEY_FILE }} ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
-            echo "Deploying to server at ${{ env.TARGET_FOLDER }}, with app name ${{ env.APP_NAME }}"
+            echo "Deploying to server at ${{ env.TARGET_FOLDER }}"
 
             cd ${{ env.TARGET_FOLDER }}
 
@@ -68,12 +67,11 @@ jobs:
 
             uvicorn main:app
 
-            rm ${{env.ZIP_FILE}}
+            # rm ${{env.ZIP_FILE}}
           EOF
         env:
           KEY_FILE: ${{ runner.temp }}/${{ env.KEY_FILE }}
           EC2_HOST: ${{ secrets.EC2_HOST }}
           EC2_USER: ${{ secrets.EC2_USER }}
           TARGET_FOLDER: ${{ env.TARGET_FOLDER }}
-          APP_NAME: ${{ env.APP_NAME }}
         timeout-minutes: 10
