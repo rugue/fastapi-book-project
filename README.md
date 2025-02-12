@@ -113,7 +113,6 @@ Available genres:
 - Mystery
 - Romance
 - Thriller
-- Thriller2
 
 ## Running Tests
 
