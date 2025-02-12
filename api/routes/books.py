@@ -69,3 +69,12 @@ async def update_book(book_id: int, book: Book) -> Book:
 async def delete_book(book_id: int) -> None:
     db.delete_book(book_id)
     return JSONResponse(status_code=status.HTTP_204_NO_CONTENT, content=None)
+
+########################### to be deleted!!!!!!!!!
+@router.get("/me/{name}", status_code=status.HTTP_200_OK)
+async def me(name: str) -> Book:
+    """Retrieve a book by its ID"""
+    return JSONResponse(
+        status_code=status.HTTP_200_OK,
+        content={"name": name}
+    )
