@@ -61,6 +61,8 @@ jobs:
             # Unzip the deployment package
             unzip -o ${{env.ZIP_FILE}}
 
+            git pull origin main
+
             python -m venv venv
             
             source venv/bin/activate  
